@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AngularJS DI</title>
+    <script src="lib/angular.js"></script>
+
+    <script>
+        var app = angular.module("app", []);
+
+        app.controller("homeController", function ($scope, $location) {
+            $scope.name = "Function Parameter DI";
+        });
+
+        about = function (myscope, mylocation) {
+            myscope.name = "$inject DT";
+        }
+        about['$inject'] = ['$scope', '$location'];
+
+        app.controller("aboutController", about);
+
+        app.controller("contactController", ['$scope', '$location', function (myscope, mylocation) {
+            myscope.name = "Inline Array DI";
+        }]);
+    </script>
+</head>
+<body ng-app="app">
+    <div ng-controller="homeController">
+        <div>
+            {{name}}
+        </div>
+    </div>
+
+    <div ng-controller="aboutController">
+        <div>
+            {{name}}
+        </div>
+    </div>
+
+    <div ng-controller="contactController">
+        <div>
+            {{name}}
+        </div>
+    </div>
+</body>
+</html>

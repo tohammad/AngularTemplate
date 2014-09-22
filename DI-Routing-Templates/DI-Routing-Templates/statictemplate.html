@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Static Template</title>
+    <script src="lib/angular.js"></script>
+    <script>
+        var app = angular.module("app", []);
+
+        app.controller("home", function ($scope) {
+            $scope.person = { name: "Hammad", address: "Noida" };
+
+            $scope.persons = [{ name: "Rasna", address: "Noida" }, { name: "Deepak", address: "Delhi" }, { name: "Lalit", address: "Noida" }]
+        });
+    </script>
+</head>
+<body ng-app="app" ng-controller="home">
+    <script type="text/ng-template" id="person.html">
+        <div>
+            {{person.name}}, {{person.address}}
+        </div>
+    </script>
+    <h1>Single Object</h1>
+    <div ng-include="'person.html'">
+
+    </div>
+    <h1>Collection of Objects</h1>
+    <div ng-repeat="person in persons" ng-include="'person.html'">
+
+    </div>
+</body>
+</html>
